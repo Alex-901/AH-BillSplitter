@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using BillSplitter.Data;
 using BillSplitter.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace BillSplitter.Controllers
 {
+    [Authorize]
     public class LedgersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -50,8 +52,6 @@ namespace BillSplitter.Controllers
         }
 
         // POST: Ledgers/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Amount,PayeeUserId,PayerUserId")] Ledger ledger)
